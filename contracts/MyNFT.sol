@@ -11,7 +11,7 @@ contract MyNFT is Initializable, ERC721Upgradeable, OwnableUpgradeable {
     using Strings for uint256;
 
     // Maximum level an NFT can reach
-    uint256 public constant MAX_LEVEL = 2;
+    uint256 public constant MAX_LEVEL = 3;
 
     // Cost to upgrade NFT (could be modified to increase with levels)
     uint256 public upgradeCost;
@@ -54,7 +54,7 @@ contract MyNFT is Initializable, ERC721Upgradeable, OwnableUpgradeable {
     function safeMint(address to, uint256 tokenId) public onlyOwner {
         _safeMint(to, tokenId);
         // Initialize the token level to 0
-        _tokenLevels[tokenId] = 0;
+        _tokenLevels[tokenId] = 1;
     }
 
     /**
