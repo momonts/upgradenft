@@ -1,0 +1,16 @@
+{
+    "name": "Selyo Badge",
+    "description": "This is the stage 1 of NFT",
+    "symbol": "SB",
+    "image": "https://i.imgur.com/kDR6Q0I.png",
+    "attributes": [
+        {
+            "trait_type": "Material",
+            "value": "Bronze"
+        },
+        {
+            "trait_type": "Tier",
+            "value": "1"
+        }
+    ]
+}
