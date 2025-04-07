@@ -54,7 +54,7 @@ contract MyNFT is Initializable, ERC721Upgradeable, OwnableUpgradeable {
     function safeMint(address to, uint256 tokenId) public onlyOwner {
         _safeMint(to, tokenId);
         // Initialize the token level to 0
-        _tokenLevels[tokenId] = 1;
+        _tokenLevels[tokenId] = 0;
     }
 
     /**
@@ -143,7 +143,6 @@ contract MyNFT is Initializable, ERC721Upgradeable, OwnableUpgradeable {
                 abi.encodePacked(
                     baseURI,
                     tokenId.toString(),
-                    "-",
                     level.toString(),
                     ".json"
                 )
