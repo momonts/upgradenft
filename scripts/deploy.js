@@ -1,23 +1,21 @@
- // We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-  const contract = await hre.ethers.deployContract("MyNFT");
+    const [deployer] = await ethers.getSigners();
+    const MyContract = await ethers.getContractFactory("MyNFT");
 
-  await contract.waitForDeployment();
+    // Pass deployer.address as the initialOwner argument to initialize()
+    const mc = await upgrades.deployProxy(MyContract, [deployer.address], {
+        initializer: "initialize"
+    });
 
-  console.log(`Deployed to ${contract.target}`);
+    await mc.waitForDeployment();
+
+    console.log("MyNFT deployed to:", await mc.getAddress());
+    console.log(`Deployed by ${deployer.address}`);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
- 
